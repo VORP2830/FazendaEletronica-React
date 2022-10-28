@@ -16,7 +16,7 @@ function App() {
   const Botao = (event) =>{
     event.preventDefault();
     if(!login || !password){
-      alert("Campos obrigatorios")
+      toast.error(`Os campos são obrigatórios!!`)
     }else{
     axios.post(`${url}/usuario/login`,
     {
