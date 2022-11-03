@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import PrivateRouter from "./PrivateRouter";
+import LoggedRoter from './LoggedRouter'
 
 import Login from '../Pages/Login'
 import Register from '../Pages/Register'
@@ -14,7 +15,11 @@ export default function Rotas() {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/login" exact element={<Login/>}/>
+
+                <Route path="/login" exact element={<LoggedRoter/>}>
+                    <Route path="/login" exact element={<Login/>}/>
+                </Route>
+
                 <Route path="/registro" exact element={<Register/>}/>
                 <Route path="/login/forgot" exact element={<EsqueceuSenha/>}/>
                 <Route path="*" exact element={<Page404/>}/>

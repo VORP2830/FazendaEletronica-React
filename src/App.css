@@ -160,6 +160,7 @@ body, html {
 
 .login-form-btn:hover {
   cursor: pointer;
+  background-color: #3c4dbb;
 }
 
 .text-center {

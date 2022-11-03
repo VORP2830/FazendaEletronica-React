@@ -25,7 +25,7 @@ function App() {
     }).then((res)=>{
     if(res.data.Token){
       cookies.set('Token',res.data.Token)
-      window.location.replace(`/principal`)
+      window.location.replace(`/home`)
   }else if(res.data.erro){
     toast.error(res.data.erro)
   }else{

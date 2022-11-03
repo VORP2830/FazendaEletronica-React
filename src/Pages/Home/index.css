@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Nunito:wght@400;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Nunito, sans-serif;
+}
+
+.home {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-home {
+  width: 100%;
+  min-height: 100vh;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: rgb(90, 86, 86);
+}
+
+.wrap-home {
+    width: 445px;
+    height: 150px;
+    align-items: center;
+    background-color: rgb(56, 54, 54);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px 33px 55px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    /*Position que faz ficar na frente*/
+  
+  }
+
+.wrap-pagamento {
+    width: 1378px;
+    height: 700px;
+    background-color: rgb(56, 54, 54);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px 33px 55px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+  }
+
+  .numero{
+    position:relative;
+    top: -150%;
+    left: 75%;
+    font-size: 50px;
+    font-family: Arial;
+    color: rgb(166, 166, 166);
+  }
+
+  .container-foto{
+    text-align: left;
+    font-size: 30px;
+  }
+
+  .PagamentoMensal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: Arial;
+    color: rgb(166, 166, 166);
+}
+
+
+
+
+
+
+
+
+
+
