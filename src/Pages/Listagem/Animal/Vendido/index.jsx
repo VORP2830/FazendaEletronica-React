@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify'
+import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import MinhaNavBar from '../../../../Components/NavBar/MinhaNavBar';
@@ -6,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import './index.css'
 import { url } from '../../../../api';
+import { BsFillTrashFill } from 'react-icons/bs';
 
 const cookies = new Cookies();
 
@@ -17,6 +19,17 @@ export default function AnimalVendido() {
       setAnimal(res.data)
     });
     }, [])
+
+    const excluir = (id) => {
+      axios.delete(`${url}/animal/${id}`,
+      {headers:{'token': token}}).then((res) => {
+        if(res.data.result){
+          toast.success(res.data)
+        }else{
+          toast.error(res)
+        }
+    })
+    }
   return (
     <>
     <MinhaNavBar/>
@@ -47,6 +60,7 @@ export default function AnimalVendido() {
                     <td>{value.DAT_NASCIMENTO}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>{value.TXT_STATUS}</td>
+                    <td><Button onClick={x => excluir(value.ID_INT_ANIMAL)}><BsFillTrashFill/></Button></td>
                   </tr>
         )             
         })}

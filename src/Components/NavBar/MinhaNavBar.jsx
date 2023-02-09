@@ -3,8 +3,17 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import { BiLogIn } from 'react-icons/bi';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function MinhaNavBar() {
+  const Logout = () => {
+    cookies.remove('Token')
+    window.location.replace(`/login`)
+  }
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -23,6 +32,10 @@ export default function MinhaNavBar() {
               <NavDropdown.Item href="/listagem/animal/morto">Animais mortos</NavDropdown.Item>
               <NavDropdown.Item href="/listagem/animal/vendido">Animais vendidos</NavDropdown.Item>
             </NavDropdown>
+
+            <Button onClick={x=>Logout()}>Logout</Button>
+            
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

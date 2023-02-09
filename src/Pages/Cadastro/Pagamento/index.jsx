@@ -15,53 +15,29 @@ const cookies = new Cookies();
 export default function Pagamento() {
   const token = cookies.get('Token')
   //Vindo do banco
-  let [tipoAnimal, setTipoAnimal] = useState([])
-  let [statusAnimal, setStatusAnimal] = useState([])
-  let [finalidadeAnimal, setfinalidadeAnimal] = useState([])
-  let [paiAnimal, setPaiAnimal] = useState([])
+  let [tipoPagamento, setTipoPagamento] = useState([])
   //Enviando para o banco
-  let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState([])
-  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState([])
-  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState([])
-  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState([])
-  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState([])
-  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState([])
-  let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState([])
-  let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState([])
+  let [cadastroPagamentoTipo, setCadastroPagamentoTipo] = useState([])
+  let [cadastroPagamentoChar, setCadastroPagamentoChar] = useState([])
+  let [cadastroPagamentoDescricao, setCadastroPagamentoDescricao] = useState([])
+  let [cadastroPagamentoDataPagamento, setCadastroPagamentoDataPagamento] = useState([])
+  let [cadastroPagamentoValor, setCadastroPagamentoValor] = useState([])
 
   useEffect(()=>{
-    axios.get(`${url}/tipo/animal`, {headers:{'token': token}}).then((res) => {
-      setTipoAnimal(res.data)
+    axios.get(`${url}/tipo/pagamento`, {headers:{'token': token}}).then((res) => {
+      setTipoPagamento(res.data)
     });
     }, [])
-    useEffect(()=>{
-      axios.get(`${url}/tipo/status`, {headers:{'token': token}}).then((res) => {
-        setStatusAnimal(res.data)
-      });
-      }, [])
 
-    useEffect(()=>{
-        axios.get(`${url}/tipo/finalidade`, {headers:{'token': token}}).then((res) => {
-          setfinalidadeAnimal(res.data)
-        });
-        }, [])
-    useEffect(()=>{
-        axios.get(`${url}/animal/pai`, {headers:{'token': token}}).then((res) => {
-          setPaiAnimal(res.data)
-          });
-          }, [])
-    const cadastroAnimal = (event) => {
+    const cadastro = (event) => {
       event.preventDefault();
-      axios.post(`${url}/animal`,
+      axios.post(`${url}/pagamento`,
       {
-        numero: cadastroNumeroAnimal,
-        id_pai: cadastroPaiAnimal,
-        cha_sexo: cadastroSexoAnimal,
-        id_finalidade: cadastroFinalidadeAnimal,
-        apelido: cadastroApelidoAnimal,
-        nascimento: cadastroDataNascimentoAnimal,
-        status: cadastroStatusAnimal,
-        tipo_animal: cadastroTipoAnimal
+        id_tipo: cadastroPagamentoTipo,
+        char_tipo: cadastroPagamentoChar,
+        descricao: cadastroPagamentoDescricao,
+        data_pagamento: cadastroPagamentoDataPagamento,
+        valor_pagamento: cadastroPagamentoValor
       },
       {headers:{'token': token}}
       ).then((res) =>{
@@ -78,84 +54,47 @@ export default function Pagamento() {
     <div className='align-self-center'>
     <Form>
       <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Numero</Form.Label>
-          <Form.Control type="number" placeholder="Numero do animal" onChange={(e) => setCadastroNumeroAnimal(e.target.value)}/>
-        </Form.Group>
-
         <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Apelido</Form.Label>
-          <Form.Control type="text" placeholder="Apelido do animal" onChange={(e) => setCadastroApelidoAnimal(e.target.value)}/>
+          <Form.Label>Descrição do pagamento</Form.Label>
+          <Form.Control type="text" placeholder="Descrição" onChange={(e) => setCadastroPagamentoDescricao(e.target.value)}/>
         </Form.Group>
-
-        <Form.Group as={Col}  controlId="formGridAddress1">
-        <Form.Label>Data de nascimento</Form.Label>
-        <Form.Control placeholder="XX/XX/XXXX" onChange={(e) => setCadastroDataNascimentoAnimal(e.target.value)}/>
-      </Form.Group>
-
       </Row>
 
       <Row className="mb-3">
 
+      <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Valor do pagamento</Form.Label>
+          <Form.Control type="number" placeholder="Valor pago" onChange={(e) => setCadastroPagamentoValor(e.target.value)}/>
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Data do pagamento</Form.Label>
+          <Form.Control type="date" placeholder="Data do pagamento" onChange={(e) => setCadastroPagamentoDataPagamento(e.target.value)}/>
+        </Form.Group>
+
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Numero da mãe do animal</Form.Label>
-          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroPaiAnimal(e.target.value)}>
+          <Form.Label>Tipo do pagamento</Form.Label>
+          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroPagamentoTipo(e.target.value)}>
             <option value=''>Selecione</option>
-            {paiAnimal.map((value) => {
+            {tipoPagamento.map((value) => {
               return(
-              <option value={value.ID_INT_ANIMAL}>{value.INT_NUMERO_ANIMAL}</option>
+              <option value={value.ID_INT_TIPO_PAGAMENTO}>{value.TXT_NOME}</option>
               )
             })}
           </Form.Select>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Finalidade do animal</Form.Label>
-          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroFinalidadeAnimal(e.target.value)}>
+          <Form.Label>Tipo de lançamento</Form.Label>
+          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroPagamentoChar(e.target.value)}>
             <option>Selecione</option>
-            {finalidadeAnimal.map((value) => {
-              return(
-              <option value={value.ID_INT_FINALIDADE}>{value.TXT_NOME}</option>
-              )
-            })}
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Sexo do animal</Form.Label>
-          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroSexoAnimal(e.target.value)}>
-            <option>Selecione</option>
-            <option value='M'>Macho</option>
-            <option value='F'>Femea</option>
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Status</Form.Label>
-          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroStatusAnimal(e.target.value)}>
-            <option>Selecione</option>
-            {statusAnimal.map((value) => {
-              return(
-              <option value={value.ID_INT_STATUS}>{value.TXT_STATUS}</option>
-              )
-            })}
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Tipo do animal</Form.Label>
-          <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroTipoAnimal(e.target.value)}>
-            <option>Selecione</option>
-            {tipoAnimal.map((value) => {
-              return(
-              <option value={value.ID_INT_TIPO_ANIMAL}>{value.TXT_NOME}</option>
-              )
-            })}
+            <option value='E'>Entrada</option>
+            <option value='S'>Saida</option>
           </Form.Select>
         </Form.Group>
       </Row>
 
-      <Button variant="primary" type="submit" onClick={cadastroAnimal}>
+      <Button variant="primary" type="submit" onClick={cadastro}>
         Cadastrar
       </Button>
     </Form>

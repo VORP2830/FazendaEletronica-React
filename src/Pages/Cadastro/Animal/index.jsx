@@ -90,9 +90,8 @@ function App() {
 
         <Form.Group as={Col}  controlId="formGridAddress1">
         <Form.Label>Data de nascimento</Form.Label>
-        <Form.Control placeholder="XX/XX/XXXX" onChange={(e) => setCadastroDataNascimentoAnimal(e.target.value)}/>
+        <Form.Control type='date' placeholder="XX/XX/XXXX" onChange={(e) => setCadastroDataNascimentoAnimal(e.target.value)}/>
       </Form.Group>
-
       </Row>
 
       <Row className="mb-3">
