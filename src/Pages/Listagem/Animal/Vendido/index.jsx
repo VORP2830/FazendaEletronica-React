@@ -1,0 +1,59 @@
+import { toast } from 'react-toastify'
+import axios from "axios";
+import Cookies from 'universal-cookie';
+import MinhaNavBar from '../../../../Components/NavBar/MinhaNavBar';
+import React, { useState, useEffect } from "react";
+import Table from 'react-bootstrap/Table';
+import './index.css'
+import { url } from '../../../../api';
+
+const cookies = new Cookies();
+
+export default function AnimalVendido() {
+  let [animal, setAnimal] = useState([])
+  const token = cookies.get('Token')
+  useEffect(()=>{
+    axios.get(`${url}/animal/vendido`, {headers:{'token': token}}).then((res) => {
+      setAnimal(res.data)
+    });
+    }, [])
+  return (
+    <>
+    <MinhaNavBar/>
+
+      <div className="conteiner">
+
+      <Table striped bordered hover size="sm">
+      <thead>
+        <tr>
+          <th>Numero do animal</th>
+          <th>ID_INT_PAI</th>
+          <th>Sexo</th>
+          <th>Apelido</th>
+          <th>Data nascimento</th>
+          <th>Tipo do animal</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead> 
+      <tbody>
+      {animal.map((value) => {
+        return(
+               <tr>
+                    <td>{value.INT_NUMERO_ANIMAL}</td>
+                    <td>{value.ID_INT_PAI}</td>
+                    <td>{value.CHA_SEXO}</td>
+                    <td>{value.TXT_APELIDO}</td>
+                    <td>{value.DAT_NASCIMENTO}</td>
+                    <td>{value.TXT_NOME}</td>
+                    <td>{value.TXT_STATUS}</td>
+                  </tr>
+        )             
+        })}
+      </tbody>
+    </Table>
+
+      </div>
+    </>
+  );
+}

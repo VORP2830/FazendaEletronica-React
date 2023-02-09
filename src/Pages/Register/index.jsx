@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../Components/Header/boi.png"
+import logo from "../../Imagens/boi.png"
 import "../../App.css";
 import {url} from "../../api.js"
 import axios from "axios";

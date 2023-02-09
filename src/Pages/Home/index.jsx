@@ -1,18 +1,17 @@
 import "./index.css";
 import { toast } from 'react-toastify'
-import Hearder from '../../Components/Header'
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import {url} from "../../api.js"
 import { useState } from "react";
+import MinhaNavBar from "../../Components/NavBar/MinhaNavBar";
 
 const cookies = new Cookies();
 
 function App() {
   return (
     <>
-    <Hearder>
-    </Hearder>
+    <MinhaNavBar/>
     <div className="home">
       <div className="container-home">
 

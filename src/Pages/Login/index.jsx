@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../App.css";
-import logo from "../../Components/Header/boi.png"
+import logo from "../../Imagens/boi.png"
 import {url} from "../../api.js"
 import axios from "axios";
 import Cookies from 'universal-cookie';
