@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 
 import PrivateRouter from "./PrivateRouter";
 import LoggedRoter from './LoggedRouter'
@@ -18,6 +18,7 @@ import TipoPagamento from '../Pages/Cadastro/TipoPagamento'
 import Pagamento from "../Pages/Cadastro/Pagamento";
 import ListagemPagamento from "../Pages/Listagem/Pagamento/Pagamento";
 import ListagemTipoPagamento from "../Pages/Listagem/Pagamento/TipoPagamento";
+import AlterarSenha from "../Pages/AlterarSenha";
 
 export default function Rotas() {
     return(
@@ -30,6 +31,7 @@ export default function Rotas() {
 
                 <Route path="/registro" exact element={<Register/>}/>
                 <Route path="/login/forgot" exact element={<EsqueceuSenha/>}/>
+                <Route path="/login/forgot/:token" exact element={<AlterarSenha/>}/>
                 <Route path="*" exact element={<Page404/>}/>
 
                 <Route path="/principal" exact element={<PrivateRouter/>}>
