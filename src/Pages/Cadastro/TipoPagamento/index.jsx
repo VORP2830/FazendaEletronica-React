@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import './index.css'
 import { url } from '../../../api';
+import { waitFor } from '@testing-library/dom';
 
 const cookies = new Cookies();
 
@@ -28,16 +29,19 @@ function App() {
       {headers:{'token': token}}
       ).then((res) =>{
         console.log(res)
-        if(res.data.mesagem){
+        if(res.data){
           toast.success('Tipo de pagamento criado com sucesso')
+          window.location.replace(`/listagem/tipo/pagamento`)
         }else{
-          toast.error('Ocorreu um erro: '+res.data)
+          toast.error('Ocorreu um erro: '+ res.data)
         }
       })
   }
   return (
     <>
     <MinhaNavBar/>
+
+    <div className='container'>
     <div className='align-self-center'>
     <Form>
         <Row>
@@ -57,6 +61,7 @@ function App() {
         Cadastrar
       </Button>
     </Form>
+    </div>      
     </div>
     </>
   );

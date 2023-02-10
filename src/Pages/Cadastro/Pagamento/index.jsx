@@ -41,16 +41,18 @@ export default function Pagamento() {
       },
       {headers:{'token': token}}
       ).then((res) =>{
-        if(res.data.mensagem){
-          toast.success(res.data.mensagem)
+        if(res.data.result){
+          toast.success(res.data.result)
+          window.location.replace(`/listagem/pagamento`)
         }else{
-          toast.error(res.data)
+          toast.error(res.data.error)
         }
       })
     }
   return (
     <>
     <MinhaNavBar/>
+    <div className='container'>
     <div className='align-self-center'>
     <Form>
       <Row className="mb-3">
@@ -71,7 +73,10 @@ export default function Pagamento() {
           <Form.Label>Data do pagamento</Form.Label>
           <Form.Control type="date" placeholder="Data do pagamento" onChange={(e) => setCadastroPagamentoDataPagamento(e.target.value)}/>
         </Form.Group>
-
+      <Row/>
+      <Row>
+        
+      </Row>
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>Tipo do pagamento</Form.Label>
           <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroPagamentoTipo(e.target.value)}>
@@ -98,6 +103,7 @@ export default function Pagamento() {
         Cadastrar
       </Button>
     </Form>
+    </div>
     </div>
     </>
   );

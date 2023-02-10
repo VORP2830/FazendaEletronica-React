@@ -24,9 +24,9 @@ export default function AnimalMorto() {
       axios.delete(`${url}/animal/${id}`,
       {headers:{'token': token}}).then((res) => {
         if(res.data.result){
-          toast.success(res.data)
+          toast.success(res.data.result)
         }else{
-          toast.error(res)
+          toast.error(res.data.error)
         }
     })
     }
@@ -40,7 +40,7 @@ export default function AnimalMorto() {
       <thead>
         <tr>
           <th>Numero do animal</th>
-          <th>ID_INT_PAI</th>
+          <th>Numero da mãe</th>
           <th>Sexo</th>
           <th>Apelido</th>
           <th>Data nascimento</th>
@@ -54,7 +54,7 @@ export default function AnimalMorto() {
         return(
                <tr>
                     <td>{value.INT_NUMERO_ANIMAL}</td>
-                    <td>{value.ID_INT_PAI}</td>
+                    <td>{value.NUMERO_PAI}</td>
                     <td>{value.CHA_SEXO}</td>
                     <td>{value.TXT_APELIDO}</td>
                     <td>{value.DAT_NASCIMENTO}</td>

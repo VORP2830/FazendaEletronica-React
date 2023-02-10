@@ -16,6 +16,8 @@ import AnimalVendido from '../Pages/Listagem/Animal/Vendido'
 import AnimalMorto from "../Pages/Listagem/Animal/Morto";
 import TipoPagamento from '../Pages/Cadastro/TipoPagamento'
 import Pagamento from "../Pages/Cadastro/Pagamento";
+import ListagemPagamento from "../Pages/Listagem/Pagamento/Pagamento";
+import ListagemTipoPagamento from "../Pages/Listagem/Pagamento/TipoPagamento";
 
 export default function Rotas() {
     return(
@@ -62,6 +64,14 @@ export default function Rotas() {
 
                 <Route path="/cadastro/pagamento" exact element={<PrivateRouter/>}>
                     <Route path="/cadastro/pagamento" exact element={<Pagamento/>}/>
+                </Route>
+
+                <Route path="/listagem/pagamento" exact element={<PrivateRouter/>}>
+                    <Route path="/listagem/pagamento" exact element={<ListagemPagamento/>}/>
+                </Route>
+
+                <Route path="/listagem/tipo/pagamento" exact element={<PrivateRouter/>}>
+                    <Route path="/listagem/tipo/pagamento" exact element={<ListagemTipoPagamento/>}/>
                 </Route>
 
             </Routes>

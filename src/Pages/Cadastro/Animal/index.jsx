@@ -65,16 +65,17 @@ function App() {
       },
       {headers:{'token': token}}
       ).then((res) =>{
-        if(res.data.mensagem){
-          toast.success(res.data.mensagem)
+        if(res.data.result){
+          toast.success(res.data.result)
         }else{
-          toast.error(res.data)
+          toast.error(res.data.error)
         }
       })
     }
   return (
     <>
     <MinhaNavBar/>
+    <div className='container'>
     <div className='align-self-center'>
     <Form>
       <Row className="mb-3">
@@ -158,6 +159,7 @@ function App() {
         Cadastrar
       </Button>
     </Form>
+    </div>
     </div>
     </>
   );

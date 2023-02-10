@@ -14,6 +14,7 @@ export default function MinhaNavBar() {
     cookies.remove('Token')
     window.location.replace(`/login`)
   }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -25,6 +26,8 @@ export default function MinhaNavBar() {
             <NavDropdown title="Pagamento" id="basic-nav-dropdown">
               <NavDropdown.Item href="/cadastro/tipo/pagamento">Cadastrar tipo pagamento</NavDropdown.Item>
               <NavDropdown.Item href="/cadastro/pagamento">Cadastrar pagamento</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/pagamento">Pagamento</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/tipo/pagamento">Tipo de pagamento</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Animal" id="basic-nav-dropdown">
             <NavDropdown.Item href="/cadastro/animal">Cadastrar animal</NavDropdown.Item>
