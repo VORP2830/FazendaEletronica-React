@@ -47,7 +47,11 @@ function App() {
       <div className="wrap-pagamento">
 
         <div className="PagamentoMensal">
-          Valor final do mês: R${}
+          Valor final do mês: R$1200
+          <br></br>
+          Total de entradas do mês:
+          <br></br>
+          Total de saidas do mê: 
         </div>
 
       </div>

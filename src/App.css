@@ -22,12 +22,11 @@ body, html {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: rgb(90, 86, 86);
 }
 
 .wrap-login {
   width: 390px;
-  background-color: rgb(56, 54, 54);
+  background-color: rgb(87, 86, 86);
   border-radius: 10px;
   overflow: hidden;
   padding: 77px 55px 33px 55px;

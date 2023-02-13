@@ -16,18 +16,21 @@ body, html {
 
 .container-home {
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   min-height: 100vh;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   padding: 20px;
-  background-color: rgb(90, 86, 86);
 }
 
+
 .wrap-home {
-    width: 445px;
+    width: 30%;
     height: 150px;
     align-items: center;
-    background-color: rgb(56, 54, 54);
+    background-color: rgb(105, 103, 103);
     border-radius: 10px;
     overflow: hidden;
     padding: 77px 55px 33px 55px;
@@ -38,9 +41,9 @@ body, html {
   }
 
 .wrap-pagamento {
-    width: 1378px;
+    width: 92%;
     height: 700px;
-    background-color: rgb(56, 54, 54);
+    background-color: rgb(105, 103, 103);
     border-radius: 10px;
     overflow: hidden;
     padding: 77px 55px 33px 55px;
