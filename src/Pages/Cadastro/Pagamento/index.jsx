@@ -25,7 +25,7 @@ export default function Pagamento() {
 
   useEffect(()=>{
     axios.get(`${url}/tipo/pagamento`, {headers:{'token': token}}).then((res) => {
-      setTipoPagamento(res.data)
+      setTipoPagamento(res.data.result)
     });
     }, [])
 
@@ -33,11 +33,11 @@ export default function Pagamento() {
       event.preventDefault();
       axios.post(`${url}/pagamento`,
       {
-        id_tipo: cadastroPagamentoTipo,
-        char_tipo: cadastroPagamentoChar,
+        idTipo: cadastroPagamentoTipo,
+        charTipo: cadastroPagamentoChar,
         descricao: cadastroPagamentoDescricao,
-        data_pagamento: cadastroPagamentoDataPagamento,
-        valor_pagamento: cadastroPagamentoValor
+        dataPagamento: cadastroPagamentoDataPagamento,
+        valorPagamento: cadastroPagamentoValor
       },
       {headers:{'token': token}}
       ).then((res) =>{

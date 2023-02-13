@@ -16,7 +16,7 @@ export default function AnimalVivo() {
   const token = cookies.get('Token')
   useEffect(()=>{
     axios.get(`${url}/animal/campo`, {headers:{'token': token}}).then((res) => {
-      setAnimal(res.data)
+      setAnimal(res.data.result)
     });
     }, [])
 

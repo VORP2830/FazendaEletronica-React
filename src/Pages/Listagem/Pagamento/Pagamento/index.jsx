@@ -18,7 +18,7 @@ export default function ListagemPagamento() {
   useEffect(()=>{
     axios.get(`${url}/pagamento`, {headers:{'token': token}}).then((res) => {
       console.log(res)
-      setAnimal(res.data)
+      setAnimal(res.data.result)
     });
     }, [])
 

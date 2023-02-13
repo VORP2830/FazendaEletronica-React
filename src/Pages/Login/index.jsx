@@ -21,10 +21,11 @@ function App() {
     axios.post(`${url}/usuario/login`,
     {
       login: login,
-      password: password,
+      senha: password,
     }).then((res)=>{
-    if(res.data.Token){
-      cookies.set('Token',res.data.Token)
+      console.log(res)
+    if(res.data.token){
+      cookies.set('Token',res.data.token)
       window.location.replace(`/home`)
   }else if(res.data.erro){
     toast.error(res.data.erro)

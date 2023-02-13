@@ -20,34 +20,34 @@ function App() {
   let [finalidadeAnimal, setfinalidadeAnimal] = useState([])
   let [paiAnimal, setPaiAnimal] = useState([])
   //Enviando para o banco
-  let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState([])
-  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState([])
-  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState([])
-  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState([])
-  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState([])
-  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState([])
-  let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState([])
-  let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState([])
+  let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState([null])
+  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState([null])
+  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState([null])
+  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState([null])
+  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState([null])
+  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState([null])
+  let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState([null])
+  let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState([null])
 
   useEffect(()=>{
     axios.get(`${url}/tipo/animal`, {headers:{'token': token}}).then((res) => {
-      setTipoAnimal(res.data)
+      setTipoAnimal(res.data.result)
     });
     }, [])
     useEffect(()=>{
       axios.get(`${url}/tipo/status`, {headers:{'token': token}}).then((res) => {
-        setStatusAnimal(res.data)
+        setStatusAnimal(res.data.result)
       });
       }, [])
 
     useEffect(()=>{
         axios.get(`${url}/tipo/finalidade`, {headers:{'token': token}}).then((res) => {
-          setfinalidadeAnimal(res.data)
+          setfinalidadeAnimal(res.data.result)
         });
         }, [])
     useEffect(()=>{
         axios.get(`${url}/animal/pai`, {headers:{'token': token}}).then((res) => {
-          setPaiAnimal(res.data)
+          setPaiAnimal(res.data.result)
           });
           }, [])
     const cadastroAnimal = (event) => {
@@ -55,13 +55,13 @@ function App() {
       axios.post(`${url}/animal`,
       {
         numero: cadastroNumeroAnimal,
-        id_pai: cadastroPaiAnimal,
-        cha_sexo: cadastroSexoAnimal,
-        id_finalidade: cadastroFinalidadeAnimal,
+        idPai: cadastroPaiAnimal,
+        charSexo: cadastroSexoAnimal,
+        idFinalidade: cadastroFinalidadeAnimal,
         apelido: cadastroApelidoAnimal,
         nascimento: cadastroDataNascimentoAnimal,
-        status: cadastroStatusAnimal,
-        tipo_animal: cadastroTipoAnimal
+        idStatus: cadastroStatusAnimal,
+        idTipoAnimal: cadastroTipoAnimal
       },
       {headers:{'token': token}}
       ).then((res) =>{

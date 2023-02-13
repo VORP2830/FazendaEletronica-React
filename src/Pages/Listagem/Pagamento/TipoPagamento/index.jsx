@@ -17,7 +17,7 @@ export default function ListagemTipoPagamento() {
   const token = cookies.get('Token')
   useEffect(()=>{
     axios.get(`${url}/tipo/pagamento`, {headers:{'token': token}}).then((res) => {
-      setPagamento(res.data)
+      setPagamento(res.data.result)
     });
     }, [])
 
