@@ -16,8 +16,8 @@ const cookies = new Cookies();
 function App() {
   const token = cookies.get('Token')
   //Vindo do banco
-  let [cadastroNome, setCadastroNome] = useState([])
-  let [cadastroDescricao, setCadastroDescricao] = useState([])
+  let [cadastroNome, setCadastroNome] = useState(null)
+  let [cadastroDescricao, setCadastroDescricao] = useState(null)
 
   const cadastro = (event) => {
     event.preventDefault();

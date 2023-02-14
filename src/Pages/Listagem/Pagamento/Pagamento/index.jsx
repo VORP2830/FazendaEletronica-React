@@ -13,6 +13,16 @@ import { BsFillTrashFill } from 'react-icons/bs';
 const cookies = new Cookies();
 
 export default function ListagemPagamento() {
+  function formatarData(data) {
+    if(data){
+          const date = new Date(data);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${day}/${month}/${year}`;
+    }
+  }
+
   let [animal, setAnimal] = useState([])
   const token = cookies.get('Token')
   useEffect(()=>{
@@ -26,6 +36,7 @@ export default function ListagemPagamento() {
       axios.delete(`${url}/pagamento/${id}`,
       {headers:{'token': token}}).then((res) => {
         if(res.data.result){
+          window.location.reload()
           toast.success(res.data.result)
         }else{
           toast.error(res.data.error)
@@ -36,7 +47,7 @@ export default function ListagemPagamento() {
   return (
     <>
     <MinhaNavBar/>
-
+      <div className='conteiner'>
       <div className="d-flex justify-content-center">
 
       <Table striped bordered hover size="sm">
@@ -55,7 +66,7 @@ export default function ListagemPagamento() {
         return(
                <tr>
                     <td>{value.CHAR_TIPO_ENTRADA_SAIDA}</td>
-                    <td>{value.DAT_PAGAMENTO}</td>
+                    <td>{formatarData(value.DAT_PAGAMENTO)}</td>
                     <td>{value.TXT_DESCRICAO}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>R${value.VLR_PAGAMENTO}</td>
@@ -66,6 +77,7 @@ export default function ListagemPagamento() {
       </tbody>
     </Table>
 
+      </div>
       </div>
     </>
   );

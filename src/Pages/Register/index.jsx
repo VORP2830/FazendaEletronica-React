@@ -19,14 +19,14 @@ function App() {
     }else{
     axios.post(`${url}/usuario/register`,{
       login: NomeUsuario,
-      password: password,
+      senha: password,
       nome: nome,
       email: email,
     }).then((res)=>{
-      if(res.data.erro){
-        toast.error(res.data.erro)
-      }else if(res.data){
-        toast.info(res.data)
+      if(res.data.error){
+        toast.error(res.data.error)
+      }else if(res.data.result){
+        toast.info(res.data.result)
         window.location.replace(`/login`)
       }
     })

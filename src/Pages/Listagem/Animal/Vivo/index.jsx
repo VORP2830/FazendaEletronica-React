@@ -12,6 +12,16 @@ import { BsFillTrashFill } from 'react-icons/bs';
 const cookies = new Cookies();
 
 export default function AnimalVivo() {
+  function formatarData(data) {
+    if(data){
+          const date = new Date(data);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${day}/${month}/${year}`;
+    }
+  }
+
   let [animal, setAnimal] = useState([])
   const token = cookies.get('Token')
   useEffect(()=>{
@@ -25,6 +35,7 @@ export default function AnimalVivo() {
       {headers:{'token': token}}).then((res) => {
         if(res.data.result){
           toast.success(res.data.result)
+          window.location.reload()
         }else{
           toast.error(res.data.error)
         }
@@ -57,7 +68,7 @@ export default function AnimalVivo() {
                     <td>{value.NUMERO_PAI}</td>
                     <td>{value.CHA_SEXO}</td>
                     <td>{value.TXT_APELIDO}</td>
-                    <td>{value.DAT_NASCIMENTO}</td>
+                    <td>{formatarData(value.DAT_NASCIMENTO)}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>{value.TXT_STATUS}</td>
                     <td><Button onClick={x => excluir(value.ID_INT_ANIMAL)}><BsFillTrashFill/></Button></td>

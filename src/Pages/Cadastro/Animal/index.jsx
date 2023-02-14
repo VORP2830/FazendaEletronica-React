@@ -20,14 +20,14 @@ function App() {
   let [finalidadeAnimal, setfinalidadeAnimal] = useState([])
   let [paiAnimal, setPaiAnimal] = useState([])
   //Enviando para o banco
-  let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState([null])
-  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState([null])
-  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState([null])
-  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState([null])
-  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState([null])
-  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState([null])
-  let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState([null])
-  let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState([null])
+  let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState(null)
+  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState(null)
+  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState(null)
+  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState(null)
+  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState(null)
+  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState(null)
+  let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState(null)
+  let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState(null)
 
   useEffect(()=>{
     axios.get(`${url}/tipo/animal`, {headers:{'token': token}}).then((res) => {

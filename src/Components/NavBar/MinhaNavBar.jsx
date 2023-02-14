@@ -26,14 +26,14 @@ export default function MinhaNavBar() {
             <NavDropdown title="Pagamento" id="basic-nav-dropdown">
               <NavDropdown.Item href="/cadastro/tipo/pagamento">Cadastrar tipo pagamento</NavDropdown.Item>
               <NavDropdown.Item href="/cadastro/pagamento">Cadastrar pagamento</NavDropdown.Item>
-              <NavDropdown.Item href="/listagem/pagamento">Pagamento</NavDropdown.Item>
-              <NavDropdown.Item href="/listagem/tipo/pagamento">Tipo de pagamento</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/pagamento">Listar pagamentos</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/tipo/pagamento">Listar tipos de pagamentos</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Animal" id="basic-nav-dropdown">
             <NavDropdown.Item href="/cadastro/animal">Cadastrar animal</NavDropdown.Item>
-              <NavDropdown.Item href="/listagem/animal/campo">Animais em campo</NavDropdown.Item>
-              <NavDropdown.Item href="/listagem/animal/morto">Animais mortos</NavDropdown.Item>
-              <NavDropdown.Item href="/listagem/animal/vendido">Animais vendidos</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/animal/campo">Listar animais em campo</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/animal/morto">Listar animais mortos</NavDropdown.Item>
+              <NavDropdown.Item href="/listagem/animal/vendido">Listar animais vendidos</NavDropdown.Item>
             </NavDropdown>
 
             <Button onClick={x=>Logout()}>Logout</Button>

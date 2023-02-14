@@ -27,8 +27,8 @@ function App() {
     if(res.data.token){
       cookies.set('Token',res.data.token)
       window.location.replace(`/home`)
-  }else if(res.data.erro){
-    toast.error(res.data.erro)
+  }else if(res.data.error){
+    toast.error(res.data.error)
   }else{
     toast.error("Erro: entre em contato com o administrador!")
   }

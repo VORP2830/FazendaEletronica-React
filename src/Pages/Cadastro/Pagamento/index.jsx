@@ -17,11 +17,11 @@ export default function Pagamento() {
   //Vindo do banco
   let [tipoPagamento, setTipoPagamento] = useState([])
   //Enviando para o banco
-  let [cadastroPagamentoTipo, setCadastroPagamentoTipo] = useState([])
-  let [cadastroPagamentoChar, setCadastroPagamentoChar] = useState([])
-  let [cadastroPagamentoDescricao, setCadastroPagamentoDescricao] = useState([])
-  let [cadastroPagamentoDataPagamento, setCadastroPagamentoDataPagamento] = useState([])
-  let [cadastroPagamentoValor, setCadastroPagamentoValor] = useState([])
+  let [cadastroPagamentoTipo, setCadastroPagamentoTipo] = useState(null)
+  let [cadastroPagamentoChar, setCadastroPagamentoChar] = useState(null)
+  let [cadastroPagamentoDescricao, setCadastroPagamentoDescricao] = useState(null)
+  let [cadastroPagamentoDataPagamento, setCadastroPagamentoDataPagamento] = useState(null)
+  let [cadastroPagamentoValor, setCadastroPagamentoValor] = useState(null)
 
   useEffect(()=>{
     axios.get(`${url}/tipo/pagamento`, {headers:{'token': token}}).then((res) => {
