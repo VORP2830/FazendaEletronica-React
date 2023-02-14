@@ -21,11 +21,11 @@ function App() {
   let [paiAnimal, setPaiAnimal] = useState([])
   //Enviando para o banco
   let [cadastroPaiAnimal, setCadastroPaiAnimal] = useState(null)
-  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState(null)
-  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState(null)
-  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState(null)
-  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState(null)
-  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState(null)
+  let [cadastroTipoAnimal, setCadastroTipoAnimal] = useState()
+  let [cadastroSexoAnimal, setCadastroSexoAnimal] = useState()
+  let [cadastroStatusAnimal, setCadastroStatusAnimal] = useState()
+  let [cadastroFinalidadeAnimal, setCadastroFinalidadeAnimal] = useState()
+  let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState()
   let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState(null)
   let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState(null)
 
@@ -50,27 +50,33 @@ function App() {
           setPaiAnimal(res.data.result)
           });
           }, [])
+
     const cadastroAnimal = (event) => {
       event.preventDefault();
-      axios.post(`${url}/animal`,
-      {
-        numero: cadastroNumeroAnimal,
-        idPai: cadastroPaiAnimal,
-        charSexo: cadastroSexoAnimal,
-        idFinalidade: cadastroFinalidadeAnimal,
-        apelido: cadastroApelidoAnimal,
-        nascimento: cadastroDataNascimentoAnimal,
-        idStatus: cadastroStatusAnimal,
-        idTipoAnimal: cadastroTipoAnimal
-      },
-      {headers:{'token': token}}
-      ).then((res) =>{
-        if(res.data.result){
-          toast.success(res.data.result)
-        }else{
-          toast.error(res.data.error)
-        }
-      })
+      if(!cadastroNumeroAnimal||!cadastroSexoAnimal||!cadastroFinalidadeAnimal||!cadastroStatusAnimal||!cadastroTipoAnimal){
+        toast.error("Todos os campos devem ser preenchidos")
+      }else{
+        axios.post(`${url}/animal`,
+            {
+              numero: cadastroNumeroAnimal,
+              idPai: cadastroPaiAnimal,
+              charSexo: cadastroSexoAnimal,
+              idFinalidade: cadastroFinalidadeAnimal,
+              apelido: cadastroApelidoAnimal,
+              nascimento: cadastroDataNascimentoAnimal,
+              idStatus: cadastroStatusAnimal,
+              idTipoAnimal: cadastroTipoAnimal
+            },
+            {headers:{'token': token}}
+            ).then((res) =>{
+              if(res.data.result){
+                toast.success(res.data.result)
+              }else{
+                toast.error(res.data.error)
+              }
+            })
+      }
+
     }
   return (
     <>

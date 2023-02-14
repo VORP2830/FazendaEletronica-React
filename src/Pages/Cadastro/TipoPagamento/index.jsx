@@ -21,7 +21,10 @@ function App() {
 
   const cadastro = (event) => {
     event.preventDefault();
-    axios.post(`${url}/tipo/pagamento`,      
+    if(!cadastroNome||!cadastroDescricao){
+      toast.error("Todos os campos tem que ser preenchidos")
+    }else{
+      axios.post(`${url}/tipo/pagamento`,      
       {
         nome: cadastroNome,
         descricao: cadastroDescricao
@@ -36,6 +39,8 @@ function App() {
           toast.error('Ocorreu um erro: '+ res.data)
         }
       })
+    }
+    
   }
   return (
     <>

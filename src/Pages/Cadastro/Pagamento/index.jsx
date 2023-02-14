@@ -31,23 +31,28 @@ export default function Pagamento() {
 
     const cadastro = (event) => {
       event.preventDefault();
-      axios.post(`${url}/pagamento`,
-      {
-        idTipo: cadastroPagamentoTipo,
-        charTipo: cadastroPagamentoChar,
-        descricao: cadastroPagamentoDescricao,
-        dataPagamento: cadastroPagamentoDataPagamento,
-        valorPagamento: cadastroPagamentoValor
-      },
-      {headers:{'token': token}}
-      ).then((res) =>{
-        if(res.data.result){
-          toast.success(res.data.result)
-          window.location.replace(`/listagem/pagamento`)
-        }else{
-          toast.error(res.data.error)
-        }
-      })
+      if(!cadastroPagamentoChar||!cadastroPagamentoDataPagamento||!cadastroPagamentoValor||!cadastroPagamentoDataPagamento){
+        toast.error("Todos os campos tem que ser preenchidos")
+      }else{
+        axios.post(`${url}/pagamento`,
+          {
+            idTipo: cadastroPagamentoTipo,
+            charTipo: cadastroPagamentoChar,
+            descricao: cadastroPagamentoDescricao,
+            dataPagamento: cadastroPagamentoDataPagamento,
+            valorPagamento: cadastroPagamentoValor
+          },
+          {headers:{'token': token}}
+          ).then((res) =>{
+            if(res.data.result){
+              toast.success(res.data.result)
+              window.location.replace(`/listagem/pagamento`)
+            }else{
+              toast.error(res.data.error)
+            }
+          })
+      }
+
     }
   return (
     <>
