@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import MinhaNavBar from '../../../../Components/NavBar/MinhaNavBar';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Table from 'react-bootstrap/Table';
 import './index.css'
 import { url } from '../../../../api';
@@ -43,15 +43,22 @@ export default function AnimalVivo() {
         }
     })
     }
+
+    const [busca, setBusca] = useState()
+    const filteredAnimal = useMemo(() => {
+      if (!busca) {
+        return animal;
+      }
+      return animal.filter(a => String(a.INT_NUMERO_ANIMAL).includes(busca));
+    }, [animal, busca]);
+
   return (
     <>
     <MinhaNavBar/>
-  <div className='pesquisa'>
+    <div className='pesquisa'>
       <InputGroup className="mb-3">
-          <Form.Control placeholder="Numero do animal"/>
-          <Button variant="outline-secondary" id="button-addon2">
-            Pesquisar
-          </Button>
+          <Form.Control placeholder="Numero do animal" type='number' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+            
         </InputGroup>
   </div>
       <div className="conteiner">
@@ -70,7 +77,7 @@ export default function AnimalVivo() {
         </tr>
       </thead> 
       <tbody>
-      {animal.map((value) => {
+      {filteredAnimal.map((value) => {
         return(
                <tr>
                     <td>{value.INT_NUMERO_ANIMAL}</td>

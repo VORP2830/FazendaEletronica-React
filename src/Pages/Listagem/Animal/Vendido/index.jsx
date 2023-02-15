@@ -47,6 +47,12 @@ export default function AnimalVendido() {
 
     
   const [busca, setBusca] = useState()
+  const filteredAnimal = useMemo(() => {
+    if (!busca) {
+      return animal;
+    }
+    return animal.filter(a => String(a.INT_NUMERO_ANIMAL).includes(busca));
+  }, [animal, busca]);
 
   return (
     
@@ -75,7 +81,7 @@ export default function AnimalVendido() {
         </tr>
       </thead> 
       <tbody>
-      {animal.map((value) => {
+      {filteredAnimal.map((value) => {
         return(
                <tr>
                     <td>{value.INT_NUMERO_ANIMAL}</td>
