@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import MinhaNavBar from '../../../../Components/NavBar/MinhaNavBar';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Table from 'react-bootstrap/Table';
 import './index.css'
 import { url } from '../../../../api';
 import { BsFillTrashFill } from 'react-icons/bs';
-import { wait } from '@testing-library/user-event/dist/utils';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
 
 const cookies = new Cookies();
 
@@ -32,9 +33,24 @@ export default function ListagemTipoPagamento() {
         }
     })
     }
+
+    const [busca, setBusca] = useState()
+    const filteredPagamento = useMemo(() => {
+      if (!busca) {
+        return pagamento;
+      }
+      return pagamento.filter(a => String(a.TXT_NOME).toLowerCase().includes(busca.toLowerCase()));
+    }, [pagamento, busca]);
   return (
     <>
     <MinhaNavBar/>
+
+    <div className='pesquisa'>
+      <InputGroup className="mb-3">
+          <Form.Control placeholder="Nome do tipo de pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+            
+        </InputGroup>
+  </div>
 
       <div className="conteiner">
 
@@ -47,7 +63,7 @@ export default function ListagemTipoPagamento() {
         </tr>
       </thead> 
       <tbody>
-      {pagamento.map((value) => {
+      {filteredPagamento.map((value) => {
         return(
                <tr>
                     <td>{value.TXT_NOME}</td>
