@@ -3,15 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/Button';
-import { BiLogIn } from 'react-icons/bi';
 import Cookies from 'universal-cookie';
+import { waitFor } from '@testing-library/react';
 
 const cookies = new Cookies();
 
 export default function MinhaNavBar() {
   const Logout = () => {
     cookies.remove('Token')
+    waitFor(5000)
     window.location.replace(`/login`)
   }
 
@@ -36,7 +36,7 @@ export default function MinhaNavBar() {
               <NavDropdown.Item href="/listagem/animal/vendido">Listar animais vendidos</NavDropdown.Item>
             </NavDropdown>
 
-            <Button onClick={x=>Logout()}>Logout</Button>
+            <button class="btn btn-sm btn-outline-secondary" type="button" onClick={x=>Logout()}>Logout</button>
             
             
           </Nav>

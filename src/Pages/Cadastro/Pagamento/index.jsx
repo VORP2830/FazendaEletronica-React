@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import './index.css'
 import { url } from '../../../api';
+import { waitFor } from '@testing-library/react';
 
 const cookies = new Cookies();
 
@@ -46,6 +47,7 @@ export default function Pagamento() {
           ).then((res) =>{
             if(res.data.result){
               toast.success(res.data.result)
+              waitFor(50000)
               window.location.replace(`/listagem/pagamento`)
             }else{
               toast.error(res.data.error)

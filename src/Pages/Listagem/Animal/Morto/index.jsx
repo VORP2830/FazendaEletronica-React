@@ -8,6 +8,8 @@ import Table from 'react-bootstrap/Table';
 import './index.css'
 import { url } from '../../../../api';
 import { BsFillTrashFill } from 'react-icons/bs';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
 
 const cookies = new Cookies();
 
@@ -44,6 +46,14 @@ export default function AnimalMorto() {
   return (
     <>
     <MinhaNavBar/>
+    <div className='pesquisa'>
+      <InputGroup className="mb-3">
+          <Form.Control placeholder="Numero do animal"/>
+          <Button variant="outline-secondary" id="button-addon2">
+            Pesquisar
+          </Button>
+        </InputGroup>
+  </div>
 
       <div className="conteiner">
 
