@@ -24,6 +24,11 @@ export default function AnimalVivo() {
     }
   }
 
+  function sexo(string){
+    if(string == "M") return "Macho"
+    else return "Femea"
+  }
+
   let [animal, setAnimal] = useState([])
   const token = cookies.get('Token')
   useEffect(()=>{
@@ -58,8 +63,19 @@ export default function AnimalVivo() {
     <div className='pesquisa'>
       <InputGroup className="mb-3">
           <Form.Control placeholder="Numero do animal" type='number' value={busca} onChange={(e) => setBusca(e.target.value)}/>
-            
-        </InputGroup>
+      </InputGroup>
+
+      <InputGroup className="mb-3">
+          <Form.Control placeholder="Numero da mãe" type='number' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      </InputGroup>
+
+      <InputGroup className="mb-3">
+          <Form.Control placeholder="Apelido" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      </InputGroup>
+
+      <InputGroup className="mb-3">
+          <Form.Control placeholder="Data nascimento" type='date' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      </InputGroup>
   </div>
       <div className="conteiner">
 
@@ -82,7 +98,7 @@ export default function AnimalVivo() {
                <tr>
                     <td>{value.INT_NUMERO_ANIMAL}</td>
                     <td>{value.NUMERO_PAI}</td>
-                    <td>{value.CHA_SEXO}</td>
+                    <td>{sexo(value.CHA_SEXO)}</td>
                     <td>{value.TXT_APELIDO}</td>
                     <td>{formatarData(value.DAT_NASCIMENTO)}</td>
                     <td>{value.TXT_NOME}</td>

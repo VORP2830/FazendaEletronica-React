@@ -54,34 +54,43 @@ export default function ListagemPagamento() {
           toast.error(res.data.error)
         }
     })
-
     }
 
     const [busca, setBusca] = useState();
     const [buscaD, setBuscaD] = useState();
     const [buscaV, setBuscaV] = useState();
+    const [buscaS, setBuscaS] = useState();
     
     const filteredPagamento = useMemo(() => {
-      if (!busca && !buscaD) {
+      if (!busca && !buscaD && !buscaV && !buscaS) {
         return pagamento;
       }
+      let filtered = pagamento;
       if (busca) {
-        return pagamento.filter(a => String(a.TXT_DESCRICAO).toLowerCase().includes(busca.toLowerCase()));
+        filtered = filtered.filter(a => String(a.TXT_DESCRICAO).toLowerCase().includes(busca.toLowerCase()));
       }
-      else if (buscaD){
-        return pagamento.filter(a => formatarDataa(a.DAT_PAGAMENTO) === (buscaD));
-      } else if (buscaV){
-        //mexer em buscar valor
-        return pagamento.filter(a => a.VLR_PAGAMENTO === (buscaV));
+      if (buscaD) {
+        filtered = filtered.filter(a => formatarDataa(a.DAT_PAGAMENTO) === (buscaD));
       }
-      return pagamento;
-    }, [pagamento, busca, buscaD, buscaV]);
+      if (buscaV) {
+        filtered = filtered.filter(a => String(a.VLR_PAGAMENTO).includes(String(buscaV)));
+      }
+      if (buscaS) {
+        filtered = filtered.filter(a => String(a.CHAR_TIPO_ENTRADA_SAIDA).includes(String(buscaS)));
+      }
+      return filtered;
+    }, [pagamento, busca, buscaD, buscaV, buscaS]);
 
     const limpar = () => {
       setBusca('')
       setBuscaD('')
       setBuscaV('')
+      setBuscaS('')
     }
+  function EouS(string){
+    if(string == 'E') return 'Entrada'
+    else return 'Saída'
+  }
     
   return (
     <>
@@ -90,19 +99,22 @@ export default function ListagemPagamento() {
     <div className='pesquisa'>
      
       <InputGroup className="mb-3">
-          <Form.Control placeholder="Descrição do pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>
-            
+          <Form.Control placeholder="Descrição do pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>   
         </InputGroup>
 
         <InputGroup className="mb-3">
           <Form.Control placeholder="Data do pagamento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
-            
         </InputGroup>
        
         <InputGroup className="mb-3">
           <Form.Control placeholder="Valor pago" type='number' value={buscaV} onChange={(e) => setBuscaV(e.target.value)}/>
-            
         </InputGroup>
+
+        <select name="select" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}> 
+          <option value="" selected>Selecione...</option>
+          <option value="E">Entrada</option>
+          <option value="S">Saída</option>
+        </select>
         
 
   </div><button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
@@ -124,7 +136,7 @@ export default function ListagemPagamento() {
       {filteredPagamento.map((value) => {
         return(
                <tr>
-                    <td>{value.CHAR_TIPO_ENTRADA_SAIDA}</td>
+                    <td>{EouS(value.CHAR_TIPO_ENTRADA_SAIDA)}</td>
                     <td>{formatarData(value.DAT_PAGAMENTO)}</td>
                     <td>{value.TXT_DESCRICAO}</td>
                     <td>{value.TXT_NOME}</td>
