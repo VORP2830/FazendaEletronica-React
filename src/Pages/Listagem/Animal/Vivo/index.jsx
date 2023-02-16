@@ -48,35 +48,80 @@ export default function AnimalVivo() {
         }
     })
     }
-
-    const [busca, setBusca] = useState()
-    const filteredAnimal = useMemo(() => {
-      if (!busca) {
-        return animal;
+    function formatarDataa(data) {
+      if(data){
+            const date = new Date(data);
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      const day = ('0' + date.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
       }
-      return animal.filter(a => String(a.INT_NUMERO_ANIMAL).includes(busca));
-    }, [animal, busca]);
+    }
+
+    const [buscaN, setBuscaN] = useState()
+    const [buscaNM, setBuscaNM] = useState()
+    const [buscaA, setBuscaA] = useState()
+    const [buscaD, setBuscaD] = useState()
+    const [buscaS, setBuscaS] = useState()
+      const filteredAnimal = useMemo(() => {
+        if (!buscaN && !buscaNM && !buscaD && !buscaA && !buscaS) {
+          return animal;
+        }
+        let filtered = animal;
+        if (buscaN) {
+          filtered = filtered.filter(a => String(a.INT_NUMERO_ANIMAL).includes(String(buscaN)));
+        }
+        if (buscaD) {
+          filtered = filtered.filter(a => formatarDataa(a.DAT_NASCIMENTO) === (buscaD));
+        }
+        if (buscaA) {
+          filtered = filtered.filter(a => String(a.TXT_APELIDO).includes(String(buscaA)));
+        }
+        if (buscaNM) {
+          filtered = filtered.filter(a => String(a.NUMERO_PAI).includes(String(buscaNM)));
+        }
+        if (buscaS) {
+          filtered = filtered.filter(a => String(a.CHA_SEXO).includes(String(buscaS)));
+        }
+        return filtered;
+      }, [animal, buscaN, buscaNM, buscaA, buscaD, buscaS]);
+
+      const limpar = () => {
+        setBuscaN('')
+        setBuscaNM('')
+        setBuscaA('')
+        setBuscaD('')
+        setBuscaS('')
+      }
 
   return (
     <>
     <MinhaNavBar/>
+
     <div className='pesquisa'>
-      <InputGroup className="mb-3">
-          <Form.Control placeholder="Numero do animal" type='number' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      <InputGroup className="input-group mb-3">
+          <Form.Control placeholder="Numero do animal" type='number' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
       </InputGroup>
 
-      <InputGroup className="mb-3">
-          <Form.Control placeholder="Numero da mãe" type='number' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      <InputGroup className="input-group mb-3">
+          <Form.Control placeholder="Numero da mãe" type='number' value={buscaNM} onChange={(e) => setBuscaNM(e.target.value)}/>
       </InputGroup>
 
-      <InputGroup className="mb-3">
-          <Form.Control placeholder="Apelido" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      <InputGroup className="input-group mb-3">
+          <Form.Control placeholder="Apelido" type='text' value={buscaA} onChange={(e) => setBuscaA(e.target.value)}/>
       </InputGroup>
 
-      <InputGroup className="mb-3">
-          <Form.Control placeholder="Data nascimento" type='date' value={busca} onChange={(e) => setBusca(e.target.value)}/>
+      <InputGroup className="input-group mb-3">
+          <Form.Control placeholder="Data nascimento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
       </InputGroup>
-  </div>
+
+      <select class="input-group mb-3" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}>
+        <option value='' selected>Selecionar</option>
+        <option value="M">Macho</option>
+        <option value="F">Femea</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
       <div className="conteiner">
 
       <Table striped bordered hover size="sm">

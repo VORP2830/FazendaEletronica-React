@@ -98,19 +98,19 @@ export default function ListagemPagamento() {
     
     <div className='pesquisa'>
      
-      <InputGroup className="mb-3">
+      <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Descrição do pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>   
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Data do pagamento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
         </InputGroup>
        
-        <InputGroup className="mb-3">
+        <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Valor pago" type='number' value={buscaV} onChange={(e) => setBuscaV(e.target.value)}/>
         </InputGroup>
 
-        <select name="select" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}> 
+        <select className='input-group mb-3' name="select" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}> 
           <option value="" selected>Selecione...</option>
           <option value="E">Entrada</option>
           <option value="S">Saída</option>
