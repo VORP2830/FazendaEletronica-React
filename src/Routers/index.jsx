@@ -19,6 +19,9 @@ import Pagamento from "../Pages/Cadastro/Pagamento";
 import ListagemPagamento from "../Pages/Listagem/Pagamento/Pagamento";
 import ListagemTipoPagamento from "../Pages/Listagem/Pagamento/TipoPagamento";
 import AlterarSenha from "../Pages/AlterarSenha";
+import EditarAnimal from "../Pages/Alteracao/Animal";
+import EditarPagamento from "../Pages/Alteracao/Pagamento";
+import EditarTipoPgamento from "../Pages/Alteracao/TipoPagamento";
 
 export default function Rotas() {
     return(
@@ -74,6 +77,18 @@ export default function Rotas() {
 
                 <Route path="/listagem/tipo/pagamento" exact element={<PrivateRouter/>}>
                     <Route path="/listagem/tipo/pagamento" exact element={<ListagemTipoPagamento/>}/>
+                </Route>
+
+                <Route path="/editar/animal/:id" exact element={<PrivateRouter/>}>
+                    <Route path="/editar/animal/:id" exact element={<EditarAnimal/>}/>
+                </Route>
+       
+                <Route path="/editar/tipo/pagamento/:id" exact element={<PrivateRouter/>}>
+                    <Route path="/editar/tipo/pagamento/:id" exact element={<EditarTipoPgamento/>}/>
+                </Route>
+
+                <Route path="/editar/pagamento/:id" exact element={<PrivateRouter/>}>
+                    <Route path="/editar/pagamento/:id" exact element={<EditarPagamento/>}/>
                 </Route>
 
             </Routes>

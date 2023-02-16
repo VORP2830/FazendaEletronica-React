@@ -10,6 +10,7 @@ import { url } from '../../../../api';
 import { BsFillTrashFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
+import { FiEdit } from 'react-icons/fi'
 
 const cookies = new Cookies();
 
@@ -150,7 +151,7 @@ export default function AnimalVendido() {
                     <td>{formatarData(value.DAT_NASCIMENTO)}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>{value.TXT_STATUS}</td>
-                    <td><Button onClick={x => excluir(value.ID_INT_ANIMAL)}><BsFillTrashFill/></Button></td>
+                    <td><Button onClick={x => excluir(value.ID_INT_ANIMAL)}><BsFillTrashFill/></Button> <Button href={`/editar/animal/${value.ID_INT_ANIMAL}`} ><FiEdit/></Button></td>
                   </tr>
         )             
         })}
