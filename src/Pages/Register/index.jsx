@@ -9,14 +9,15 @@ import { toast } from 'react-toastify'
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ConfirmedPassword, setConfirmedPassword] = useState("");
   const [nome, setNome] = useState("");
   const [NomeUsuario, setNomeUsuario] = useState("");
 
   const Botao = (event) =>{
     event.preventDefault()
     if(!nome || !password || !email || !NomeUsuario){
-      alert("Todos os campos precisam ser preenchidos")
-    }else{
+      toast.error("Todos os campos precisam ser preenchidos")
+    }else if (ConfirmedPassword == password){
     axios.post(`${url}/usuario/register`,{
       login: NomeUsuario,
       senha: password,
@@ -30,6 +31,8 @@ function App() {
         window.location.replace(`/login`)
       }
     })
+  }else{
+    toast.error("A senha e a confirmação de senha tem que ser iguais!")
   }
 }
 
@@ -86,6 +89,16 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span className="focus-input" data-placeholder="Senha"></span>
+            </div>
+
+            <div className="wrap-input">
+              <input
+                className={ConfirmedPassword !== "" ? "has-val input" : "input"}
+                type="password"
+                value={ConfirmedPassword}
+                onChange={(e) => setConfirmedPassword(e.target.value)}
+              />
+              <span className="focus-input" data-placeholder="Confirmação de senha"></span>
             </div>
 
             <div className="container-login-form-btn">
