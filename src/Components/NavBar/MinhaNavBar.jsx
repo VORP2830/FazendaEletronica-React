@@ -34,6 +34,7 @@ export default function MinhaNavBar() {
               <NavDropdown.Item href="/listagem/animal/campo">Listar animais em campo</NavDropdown.Item>
               <NavDropdown.Item href="/listagem/animal/morto">Listar animais mortos</NavDropdown.Item>
               <NavDropdown.Item href="/listagem/animal/vendido">Listar animais vendidos</NavDropdown.Item>
+              <NavDropdown.Item href="/animal/filhos">Listar quantidade de filhos por animal</NavDropdown.Item>
             </NavDropdown>
 
             <button class="btn btn-sm btn-outline-secondary" type="button" onClick={x=>Logout()}>Logout</button>

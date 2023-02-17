@@ -31,6 +31,7 @@ function App() {
   let [cadastroNumeroAnimal, setCadastroNumeroAnimal] = useState()
   let [cadastroApelidoAnimal, setCadastroApelidoAnimal] = useState()
   let [cadastroDataNascimentoAnimal, setCadastroDataNascimentoAnimal] = useState()
+  let [cadastroDataVenda, setCadastroDataVenda] = useState()
 
   useEffect(() => {
     axios.get(`${url}/animal/${id}`, { headers: { 'token': token } })
@@ -85,7 +86,6 @@ function App() {
           }, [])
 
     const cadastroAnimal = (event) => {
-      toast.info(animalId)
       event.preventDefault();
       if(!cadastroNumeroAnimal||!cadastroSexoAnimal||!cadastroFinalidadeAnimal||!cadastroStatusAnimal||!cadastroTipoAnimal){
         toast.error("Todos os campos devem ser preenchidos")
@@ -100,12 +100,14 @@ function App() {
               apelido: cadastroApelidoAnimal,
               nascimento: cadastroDataNascimentoAnimal,
               idStatus: cadastroStatusAnimal,
-              idTipoAnimal: cadastroTipoAnimal
+              idTipoAnimal: cadastroTipoAnimal,
+              dataVenda: cadastroDataVenda
             },
             {headers:{'token': token}}
             ).then((res) =>{
               if(res.data.result){
                 toast.success(res.data.result)
+                window.location.replace(`/home`)
               }else{
                 toast.error(res.data.error)
               }
@@ -113,6 +115,29 @@ function App() {
       }
 
     }
+    const [mostrarCampoDataVenda, setMostrarCampoDataVenda] = useState(false);
+
+    function getIdStatusVendido(statusAnimal) {
+      for (let i = 0; i < statusAnimal.length; i++) {
+        if (statusAnimal[i].TXT_STATUS === 'Vendido') {
+          return statusAnimal[i].ID_INT_STATUS;
+        }
+      }
+      return null;
+    }
+    
+
+      const idStatusVendido = getIdStatusVendido(statusAnimal);
+
+
+      useEffect(() => {
+        if (+cadastroStatusAnimal === +idStatusVendido) {
+          setMostrarCampoDataVenda(true);
+        } else {
+          setMostrarCampoDataVenda(false);
+        }
+      }, [cadastroStatusAnimal, idStatusVendido]);
+      
   return (
     <>
     <MinhaNavBar/>
@@ -173,7 +198,7 @@ function App() {
 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>Status</Form.Label>
-          <Form.Select defaultValue={cadastroStatusAnimal} value={cadastroStatusAnimal} onChange={(e) => setCadastroStatusAnimal(e.target.value)}>
+          <Form.Select defaultValue={cadastroStatusAnimal} value={cadastroStatusAnimal} onChange={(e) => setCadastroStatusAnimal(e.target.value) }>
             <option>Selecione</option>
             {statusAnimal.map((value) => {
               return(
@@ -193,6 +218,11 @@ function App() {
               )
             })}
           </Form.Select>
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridAddress1" style={{ display: mostrarCampoDataVenda ? 'block' : 'none' }}>
+        <Form.Label>Data de venda</Form.Label>
+        <Form.Control type='date' placeholder="XX/XX/XXXX" value={cadastroDataVenda} onChange={(e) => setCadastroDataVenda(e.target.value)}/>
         </Form.Group>
       </Row>
 

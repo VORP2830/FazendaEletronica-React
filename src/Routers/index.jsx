@@ -22,6 +22,7 @@ import AlterarSenha from "../Pages/AlterarSenha";
 import EditarAnimal from "../Pages/Alteracao/Animal";
 import EditarPagamento from "../Pages/Alteracao/Pagamento";
 import EditarTipoPgamento from "../Pages/Alteracao/TipoPagamento";
+import AnimalFilhos from "../Pages/Listagem/Animal/FilhosPorVaca";
 
 export default function Rotas() {
     return(
@@ -89,6 +90,10 @@ export default function Rotas() {
 
                 <Route path="/editar/pagamento/:id" exact element={<PrivateRouter/>}>
                     <Route path="/editar/pagamento/:id" exact element={<EditarPagamento/>}/>
+                </Route>
+
+                <Route path="/animal/filhos" exact element={<PrivateRouter/>}>
+                    <Route path="/animal/filhos" exact element={<AnimalFilhos/>}/>
                 </Route>
 
             </Routes>

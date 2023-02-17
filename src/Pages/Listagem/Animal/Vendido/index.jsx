@@ -11,6 +11,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { FiEdit } from 'react-icons/fi'
+import { Row } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
@@ -49,7 +50,7 @@ export default function AnimalVendido() {
     
     function formatarDataa(data) {
       if(data){
-            const date = new Date(data);
+      const date = new Date(data);
       const year = date.getFullYear();
       const month = ('0' + (date.getMonth() + 1)).slice(-2);
       const day = ('0' + date.getDate()).slice(-2);
@@ -60,13 +61,22 @@ export default function AnimalVendido() {
       if(string == "M") return "Macho"
       else return "Femea"
     }
+
+    function formatarDataMesAno(data) {
+      const date = new Date(data);
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      return `${year}-${month}`;
+    }
+
     const [buscaN, setBuscaN] = useState()
     const [buscaNM, setBuscaNM] = useState()
     const [buscaA, setBuscaA] = useState()
     const [buscaD, setBuscaD] = useState()
     const [buscaS, setBuscaS] = useState()
+    const [buscaMA, setBuscaMA] = useState()
       const filteredAnimal = useMemo(() => {
-        if (!buscaN && !buscaNM && !buscaD && !buscaA && !buscaS) {
+        if (!buscaN && !buscaNM && !buscaD && !buscaA && !buscaS && !buscaMA) {
           return animal;
         }
         let filtered = animal;
@@ -85,8 +95,11 @@ export default function AnimalVendido() {
         if (buscaS) {
           filtered = filtered.filter(a => String(a.CHA_SEXO).includes(String(buscaS)));
         }
+        if (buscaMA) {
+          filtered = filtered.filter(a => formatarDataMesAno(a.DAT_VENDA) === (buscaMA));
+        }
         return filtered;
-      }, [animal, buscaN, buscaNM, buscaA, buscaD, buscaS]);
+      }, [animal, buscaN, buscaNM, buscaA, buscaD, buscaS, buscaMA]);
 
       const limpar = () => {
         setBuscaN('')
@@ -94,36 +107,51 @@ export default function AnimalVendido() {
         setBuscaA('')
         setBuscaD('')
         setBuscaS('')
+        setBuscaMA('')
       }
+      console.log(formatarDataMesAno(buscaMA))
 
   return (
     <>
     <MinhaNavBar/>
 
-    <div className='pesquisa'>
-      <InputGroup className="input-group mb-3">
-          <Form.Control placeholder="Numero do animal" type='number' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
-      </InputGroup>
+  <div className='pesquisa'>
+    <Row>
+  <label htmlFor="buscaN">Número do animal:</label>
+  <InputGroup className="input-group mb-3">
+    <Form.Control id="buscaN" placeholder="Número do animal" type='number' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
+  </InputGroup>
 
-      <InputGroup className="input-group mb-3">
-          <Form.Control placeholder="Numero da mãe" type='number' value={buscaNM} onChange={(e) => setBuscaNM(e.target.value)}/>
-      </InputGroup>
+  <label htmlFor="buscaNM">Número da mãe:</label>
+  <InputGroup className="input-group mb-3">
+    <Form.Control id="buscaNM" placeholder="Número da mãe" type='number' value={buscaNM} onChange={(e) => setBuscaNM(e.target.value)}/>
+  </InputGroup>
 
-      <InputGroup className="input-group mb-3">
-          <Form.Control placeholder="Apelido" type='text' value={buscaA} onChange={(e) => setBuscaA(e.target.value)}/>
-      </InputGroup>
+  <label htmlFor="buscaA">Apelido:</label>
+  <InputGroup className="input-group mb-3">
+    <Form.Control id="buscaA" placeholder="Apelido" type='text' value={buscaA} onChange={(e) => setBuscaA(e.target.value)}/>
+  </InputGroup>
+  </Row>
+  <Row>
+  <label htmlFor="buscaD">Data de nascimento:</label>
+  <InputGroup className="input-group mb-3">
+    <Form.Control id="buscaD" placeholder="Data de nascimento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
+  </InputGroup>
 
-      <InputGroup className="input-group mb-3">
-          <Form.Control placeholder="Data nascimento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
-      </InputGroup>
+  <label htmlFor="buscaS">Sexo:</label>
+  <select id="buscaS" className="input-group mb-3" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}>
+    <option value='' selected>Selecionar</option>
+    <option value="M">Macho</option>
+    <option value="F">Fêmea</option>
+  </select>
 
-      <select class="input-group mb-3" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}>
-        <option value='' selected>Selecionar</option>
-        <option value="M">Macho</option>
-        <option value="F">Femea</option>
-      </select>
+  <label htmlFor="buscaMA">Data de venda:</label>
+  <InputGroup className="input-group mb-3">
+    <Form.Control id="buscaMA" placeholder="Data de venda" type='month' value={buscaMA} onChange={(e) => setBuscaMA(e.target.value)}/>
+  </InputGroup>
+  </Row>
+</div>
 
-  </div>
     <button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
       <div className="conteiner">
 
@@ -137,6 +165,7 @@ export default function AnimalVendido() {
           <th>Data nascimento</th>
           <th>Tipo do animal</th>
           <th>Status</th>
+          <th>Data da venda</th>
           <th>Ações</th>
         </tr>
       </thead> 
@@ -151,6 +180,7 @@ export default function AnimalVendido() {
                     <td>{formatarData(value.DAT_NASCIMENTO)}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>{value.TXT_STATUS}</td>
+                    <td>{formatarData(value.DAT_VENDA)}</td>
                     <td><Button onClick={x => excluir(value.ID_INT_ANIMAL)}><BsFillTrashFill/></Button> <Button href={`/editar/animal/${value.ID_INT_ANIMAL}`} ><FiEdit/></Button></td>
                   </tr>
         )             
