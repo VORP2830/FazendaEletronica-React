@@ -10,8 +10,7 @@ import { url } from '../../../../api';
 import { BsFillTrashFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-
+import { FiEdit } from 'react-icons/fi'
 
 const cookies = new Cookies();
 
@@ -141,7 +140,7 @@ export default function ListagemPagamento() {
                     <td>{value.TXT_DESCRICAO}</td>
                     <td>{value.TXT_NOME}</td>
                     <td>R${value.VLR_PAGAMENTO}</td>
-                    <td><Button onClick={x => excluir(value.ID_INT_PAGAMENTO)}><BsFillTrashFill/></Button></td>
+                    <td><Button onClick={x => excluir(value.ID_INT_PAGAMENTO)}><BsFillTrashFill/></Button> <Button href={`/editar/pagamento/${value.ID_INT_PAGAMENTO}`} ><FiEdit/></Button></td>
                   </tr>
         )             
         })}
