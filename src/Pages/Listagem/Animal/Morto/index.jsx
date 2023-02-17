@@ -58,11 +58,21 @@ export default function AnimalMorto() {
       if(string == "M") return "Macho"
       else return "Femea"
     }
+
+    function formatarDataMesAno(data) {
+      const date = new Date(data);
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      return `${year}-${month}`;
+    }
+
     const [buscaN, setBuscaN] = useState()
     const [buscaNM, setBuscaNM] = useState()
     const [buscaA, setBuscaA] = useState()
     const [buscaD, setBuscaD] = useState()
     const [buscaS, setBuscaS] = useState()
+    const [buscaMA, setBuscaMA] = useState()
+
       const filteredAnimal = useMemo(() => {
         if (!buscaN && !buscaNM && !buscaD && !buscaA && !buscaS) {
           return animal;

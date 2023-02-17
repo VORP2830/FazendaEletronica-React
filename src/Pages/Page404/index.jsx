@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import "../../App.css";
 import logo from "../../Imagens/boi.png"
 import "./style.css"
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 function App() {
+  if(cookies.get(`Token`)){
+    cookies.remove('Token')
+  }
 
   return (
     <div className="container">

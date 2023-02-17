@@ -53,15 +53,22 @@ export default function ListagemPagamento() {
           toast.error(res.data.error)
         }
     })
+    }    
+    function formatarDataMesAno(data) {
+      const date = new Date(data);
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      return `${year}-${month}`;
     }
 
     const [busca, setBusca] = useState();
     const [buscaD, setBuscaD] = useState();
     const [buscaV, setBuscaV] = useState();
     const [buscaS, setBuscaS] = useState();
-    
+    const [buscaMA, setBuscaMA] = useState();
+
     const filteredPagamento = useMemo(() => {
-      if (!busca && !buscaD && !buscaV && !buscaS) {
+      if (!busca && !buscaD && !buscaV && !buscaS && !buscaMA) {
         return pagamento;
       }
       let filtered = pagamento;
@@ -77,14 +84,17 @@ export default function ListagemPagamento() {
       if (buscaS) {
         filtered = filtered.filter(a => String(a.CHAR_TIPO_ENTRADA_SAIDA).includes(String(buscaS)));
       }
+      if (buscaMA) {
+        filtered = filtered.filter(a => formatarDataMesAno(a.DAT_PAGAMENTO) === (buscaMA));      }
       return filtered;
-    }, [pagamento, busca, buscaD, buscaV, buscaS]);
+    }, [pagamento, busca, buscaD, buscaV, buscaS, buscaMA]);
 
     const limpar = () => {
       setBusca('')
       setBuscaD('')
       setBuscaV('')
       setBuscaS('')
+      setBuscaMA('')
     }
   function EouS(string){
     if(string == 'E') return 'Entrada'
@@ -114,6 +124,10 @@ export default function ListagemPagamento() {
           <option value="E">Entrada</option>
           <option value="S">Saída</option>
         </select>
+
+        <InputGroup className="input-group mb-3">
+          <Form.Control id="buscaMA" placeholder="Data de venda" type='month' value={buscaMA} onChange={(e) => setBuscaMA(e.target.value)}/>
+        </InputGroup>
         
 
   </div><button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>

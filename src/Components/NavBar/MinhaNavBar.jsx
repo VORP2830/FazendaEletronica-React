@@ -11,7 +11,6 @@ const cookies = new Cookies();
 export default function MinhaNavBar() {
   const Logout = () => {
     cookies.remove('Token')
-    waitFor(5000)
     window.location.replace(`/login`)
   }
 
