@@ -38,7 +38,7 @@ function EditarTipoPgamento() {
   const cadastro = (event) => {
     event.preventDefault();
     if(!cadastroNome||!cadastroDescricao){
-      toast.error("Todos os campos tem que ser preenchidos")
+      toast.error("Todos os campos com * devem ser preenchidos!")
     }else{
       axios.post(`${url}/tipo/pagamento`,      
       {
@@ -68,12 +68,12 @@ function EditarTipoPgamento() {
     <Form>
         <Row>
         <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Tipo do pagamento</Form.Label>
+          <Form.Label>Tipo do pagamento*</Form.Label>
           <Form.Control type="text" placeholder="Tipo do pagamento" value={cadastroNome} onChange={(e) => setCadastroNome(e.target.value)}/>
         </Form.Group>
 
         <Form.Group as={Col}  controlId="formGridAddress1">
-        <Form.Label>Descrição do pagamento</Form.Label>
+        <Form.Label>Descrição do pagamento*</Form.Label>
         <Form.Control placeholder="Descrição" value={cadastroDescricao} onChange={(e) => setCadastroDescricao(e.target.value)}/>
       </Form.Group>
       </Row>

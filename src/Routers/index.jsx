@@ -25,6 +25,7 @@ import EditarTipoPgamento from "../Pages/Alteracao/TipoPagamento";
 import AnimalFilhos from "../Pages/Relatorios/FilhosPorVaca"
 import PagamentoAno from "../Pages/Relatorios/PagamentoAno";
 import PagamentoTipo from "../Pages/Relatorios/PagamentoTipo";
+import AnimaisMortosVendidosAno from "../Pages/Relatorios/AnimaisMortoVendidosAno";
 
 
 export default function Rotas() {
@@ -102,9 +103,13 @@ export default function Rotas() {
                 <Route path="/relatorio/pagamento" exact element={<PrivateRouter/>}>
                     <Route path="/relatorio/pagamento" exact element={<PagamentoAno/>}/>
                 </Route>
-
+                
                 <Route path="/relatorio/tipo/pagamento" exact element={<PrivateRouter/>}>
                     <Route path="/relatorio/tipo/pagamento" exact element={<PagamentoTipo/>}/>
+                </Route>
+
+                <Route path="/relatorio/animais/vendidomorto" exact element={<PrivateRouter/>}>
+                    <Route path="/relatorio/animais/vendidomorto" exact element={<AnimaisMortosVendidosAno/>}/>
                 </Route>
                 
             </Routes>

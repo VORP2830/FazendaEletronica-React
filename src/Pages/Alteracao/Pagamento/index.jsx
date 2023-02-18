@@ -65,7 +65,7 @@ export default function EditarPagamento() {
     const cadastro = (event) => {
       event.preventDefault();
       if(!cadastroPagamentoChar||!cadastroPagamentoDataPagamento||!cadastroPagamentoValor||!cadastroPagamentoDataPagamento){
-        toast.error("Todos os campos tem que ser preenchidos")
+        toast.error("Todos os campos com * devem ser preenchidos!")
       }else{
         axios.put(`${url}/pagamento`,
           {
@@ -105,12 +105,12 @@ export default function EditarPagamento() {
       <Row className="mb-3">
 
       <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Valor do pagamento</Form.Label>
+          <Form.Label>Valor do pagamento*</Form.Label>
           <Form.Control type="number" placeholder="Valor pago" value={cadastroPagamentoValor} onChange={(e) => setCadastroPagamentoValor(e.target.value)}/>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Data do pagamento</Form.Label>
+          <Form.Label>Data do pagamento*</Form.Label>
           <Form.Control type="date" placeholder="Data do pagamento" value={cadastroPagamentoDataPagamento} onChange={(e) => setCadastroPagamentoDataPagamento(e.target.value)}/>
         </Form.Group>
       <Row/>
@@ -130,7 +130,7 @@ export default function EditarPagamento() {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Tipo de lançamento</Form.Label>
+          <Form.Label>Tipo de lançamento*</Form.Label>
           <Form.Select defaultValue={cadastroPagamentoChar} value={cadastroPagamentoChar} onChange={(e) => setCadastroPagamentoChar(e.target.value)}>
             <option>Selecione</option>
             <option value='E'>Entrada</option>

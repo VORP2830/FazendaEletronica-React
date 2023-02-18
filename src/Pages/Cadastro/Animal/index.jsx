@@ -54,7 +54,7 @@ function App() {
     const cadastroAnimal = (event) => {
       event.preventDefault();
       if(!cadastroNumeroAnimal||!cadastroSexoAnimal||!cadastroFinalidadeAnimal||!cadastroStatusAnimal||!cadastroTipoAnimal){
-        toast.error("Todos os campos devem ser preenchidos")
+        toast.error("Todos os campos com * devem ser preenchidos!")
       }else{
         axios.post(`${url}/animal`,
             {
@@ -86,7 +86,7 @@ function App() {
     <Form>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Numero</Form.Label>
+          <Form.Label>Numero*</Form.Label>
           <Form.Control type="number" placeholder="Numero do animal" onChange={(e) => setCadastroNumeroAnimal(e.target.value)}/>
         </Form.Group>
 
@@ -116,7 +116,7 @@ function App() {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Finalidade do animal</Form.Label>
+          <Form.Label>Finalidade do animal*</Form.Label>
           <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroFinalidadeAnimal(e.target.value)}>
             <option>Selecione</option>
             {finalidadeAnimal.map((value) => {
@@ -128,7 +128,7 @@ function App() {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Sexo do animal</Form.Label>
+          <Form.Label>Sexo do animal*</Form.Label>
           <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroSexoAnimal(e.target.value)}>
             <option>Selecione</option>
             <option value='M'>Macho</option>
@@ -137,7 +137,7 @@ function App() {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Status</Form.Label>
+          <Form.Label>Status*</Form.Label>
           <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroStatusAnimal(e.target.value)}>
             <option>Selecione</option>
             {statusAnimal.map((value) => {
@@ -149,7 +149,7 @@ function App() {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>Tipo do animal</Form.Label>
+          <Form.Label>Tipo do animal*</Form.Label>
           <Form.Select defaultValue="Choose..." onChange={(e) => setCadastroTipoAnimal(e.target.value)}>
             <option>Selecione</option>
             {tipoAnimal.map((value) => {

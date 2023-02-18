@@ -38,6 +38,7 @@ export default function MinhaNavBar() {
             <NavDropdown.Item href="/animal/filhos">Animal e filhos</NavDropdown.Item>
               <NavDropdown.Item href="/relatorio/pagamento">Pagamento por ano</NavDropdown.Item>
               <NavDropdown.Item href="/relatorio/tipo/pagamento">Pagamento por tipo</NavDropdown.Item>
+              <NavDropdown.Item href="relatorio/animais/vendidomorto">Animais vendidos e mortos por ano</NavDropdown.Item>
             </NavDropdown>
 
             <button class="btn btn-sm btn-outline-secondary" type="button" onClick={x=>Logout()}>Logout</button>
