@@ -1,18 +1,18 @@
 import { toast } from 'react-toastify'
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import MinhaNavBar from '../../../../Components/NavBar/MinhaNavBar';
+import MinhaNavBar from '../../../Components/NavBar/MinhaNavBar';
 import React, { useState, useEffect, useMemo } from "react";
 import Table from 'react-bootstrap/Table';
 import './index.css'
-import { url } from '../../../../api';
+import { url } from '../../../api';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { Row } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
-export default function AnimalFilhos() {
+export default function PagamentoTipo() {
 
   function formatarData(data) {
     if(data){
@@ -27,7 +27,7 @@ export default function AnimalFilhos() {
   let [animal, setAnimal] = useState([])
   const token = cookies.get('Token')
   useEffect(()=>{
-    axios.get(`${url}/animal/media/filhos`, {headers:{'token': token}}).then((res) => {
+    axios.get(`${url}/relatorio/tipo/pagamento`, {headers:{'token': token}}).then((res) => {
       setAnimal(res.data.result)
     });
     }, [])
@@ -52,10 +52,10 @@ export default function AnimalFilhos() {
         }
         let filtered = animal;
         if (buscaN) {
-          filtered = filtered.filter(a => String(a.INT_NUMERO_ANIMAL).includes(String(buscaN)));
+          filtered = filtered.filter(a => String(a.TIPO_PAGAMENTO).toLowerCase().includes(String(buscaN).toLowerCase()));
         }
         if (buscaD) {
-          filtered = filtered.filter(a => formatarDataa(a.DAT_NASCIMENTO) === (buscaD));
+          filtered = filtered.filter(a => String(a.ANO).includes(String(buscaD)));
         }
         return filtered;
       }, [animal, buscaN, buscaD]);
@@ -71,15 +71,15 @@ export default function AnimalFilhos() {
 
   <div className='pesquisa'>
   <Row>
-  <label htmlFor="buscaN">Número do animal:</label>
+  <label htmlFor="buscaN">Tipo pagamento:</label>
   <InputGroup className="input-group mb-3">
-    <Form.Control id="buscaN" placeholder="Número do animal" type='number' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
+    <Form.Control id="buscaN" placeholder="Tipo pagamento" type='text' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
   </InputGroup>
   </Row>
   <Row>
-  <label htmlFor="buscaD">Data de nascimento:</label>
+  <label htmlFor="buscaD">Ano de acontecimento:</label>
   <InputGroup className="input-group mb-3">
-    <Form.Control id="buscaD" placeholder="Data de nascimento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
+    <Form.Control id="buscaD" placeholder="Ano de acontecimento" type='number' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
   </InputGroup>
   </Row>
   <button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
@@ -90,22 +90,22 @@ export default function AnimalFilhos() {
       <Table striped bordered hover size="sm">
       <thead>
         <tr>
-          <th>Numero do animal</th>
-          <th>Data nascimento</th>
-          <th>Media de filhos por ano</th>
-          <th>Quantidade de filhos</th>
-          <th>Idade</th>
+          <th>Ano de acontecimento</th>
+          <th>TIpo de pagamento</th>
+          <th>Total entrada</th>
+          <th>Total saida</th>
+          <th>Valor final do ano</th>
         </tr>
       </thead> 
       <tbody>
       {filteredAnimal.map((value) => {
         return(
                <tr>
-                    <td>{value.INT_NUMERO_ANIMAL}</td>
-                    <td>{formatarData(value.DAT_NASCIMENTO)}</td>
-                    <td>{value.MEDIA_FILHOS_POR_ANO}</td>
-                    <td>{(value.QUANTIDADE_FILHOS)}</td>
-                    <td>{(value.IDADE)}</td>
+                    <td>{value.ANO}</td>
+                    <td>{(value.TIPO_PAGAMENTO)}</td>
+                    <td>R${value.TOTAL_ENTRADAS}</td>
+                    <td>R${(value.TOTAL_SAIDAS)}</td>
+                    <td>R${(value.VALOR_FINAL_ANO)}</td>
                   </tr>
         )             
         })}
