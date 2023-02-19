@@ -12,5 +12,7 @@
     width: 60%;
     padding-left: 10%;
     padding-top: 1%;
+    display: inline-flex;
+    padding: 10px ;
 }
 

@@ -11,6 +11,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import { FiEdit } from 'react-icons/fi'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
+import { Row } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
@@ -109,30 +110,35 @@ export default function AnimalMorto() {
     <MinhaNavBar/>
 
     <div className='pesquisa'>
+      <Row>
+        <label>Numero do animal:</label>
       <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Numero do animal" type='number' value={buscaN} onChange={(e) => setBuscaN(e.target.value)}/>
       </InputGroup>
-
+      <label>Numero da mãe:</label>
       <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Numero da mãe" type='number' value={buscaNM} onChange={(e) => setBuscaNM(e.target.value)}/>
       </InputGroup>
-
+      <label>Apelido:</label>
       <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Apelido" type='text' value={buscaA} onChange={(e) => setBuscaA(e.target.value)}/>
       </InputGroup>
-
+    </Row>
+    <Row>
+    <label>Data de nascimento:</label>
       <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Data nascimento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
       </InputGroup>
-
+      <label>Sexo do animal:</label>
       <select class="input-group mb-3" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}>
         <option value='' selected>Selecionar</option>
         <option value="M">Macho</option>
         <option value="F">Femea</option>
       </select>
+      </Row>
     </div>
-    
     <button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
+    
       <div className="conteiner">
 
       <Table striped bordered hover size="sm">

@@ -11,6 +11,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { FiEdit } from 'react-icons/fi'
+import { Row } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
@@ -47,10 +48,12 @@ export default function ListagemTipoPagamento() {
     <MinhaNavBar/>
 
     <div className='pesquisa'>
+      <Row>
+    <label>Nome do tipo de pagamento:</label>
       <InputGroup className="mb-3">
           <Form.Control placeholder="Nome do tipo de pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>
-            
         </InputGroup>
+      </Row>
   </div>
 
       <div className="conteiner">

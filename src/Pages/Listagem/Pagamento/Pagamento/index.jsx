@@ -11,6 +11,8 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { FiEdit } from 'react-icons/fi'
+import { Row } from 'react-bootstrap';
+
 
 const cookies = new Cookies();
 
@@ -106,32 +108,39 @@ export default function ListagemPagamento() {
     <MinhaNavBar/>
     
     <div className='pesquisa'>
-     
+     <Row>
+     <label>Descrição do pagamento:</label>
       <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Descrição do pagamento" type='text' value={busca} onChange={(e) => setBusca(e.target.value)}/>   
         </InputGroup>
-
+        <label>Data do pagamento:</label>
         <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Data do pagamento" type='date' value={buscaD} onChange={(e) => setBuscaD(e.target.value)}/>
         </InputGroup>
-       
+        <label>Valor do pagamento:</label>
         <InputGroup className="input-group mb-3">
           <Form.Control placeholder="Valor pago" type='number' value={buscaV} onChange={(e) => setBuscaV(e.target.value)}/>
         </InputGroup>
-
+        </Row>
+        <Row>
+        <label>Tipo do pagamento (Entrada/Saída):</label>
         <select className='input-group mb-3' name="select" value={buscaS} onChange={(e) => setBuscaS(e.target.value)}> 
           <option value="" selected>Selecione...</option>
           <option value="E">Entrada</option>
           <option value="S">Saída</option>
         </select>
-
+        <label>Mes e ano do pagamento:</label>
         <InputGroup className="input-group mb-3">
           <Form.Control id="buscaMA" placeholder="Data de venda" type='month' value={buscaMA} onChange={(e) => setBuscaMA(e.target.value)}/>
         </InputGroup>
-        
+        </Row>
 
-  </div><button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
+  </div>
+  <div className='pesquisa'>
+  <button type="button" class="btn btn-primary" onClick={(e) => limpar()}>Limpar filtros</button>
+  </div >
       <div className='conteiner'>
+        
       <div className="d-flex justify-content-center">
 
       <Table striped bordered hover size="sm">
