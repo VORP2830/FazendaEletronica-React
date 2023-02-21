@@ -12,6 +12,7 @@ export default function MinhaNavBar() {
   const Logout = () => {
     cookies.remove('Token')
     window.location.replace(`/login`)
+    window.location.reload()
   }
 
   return (

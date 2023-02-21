@@ -53,6 +53,9 @@ export default function ListagemPagamento() {
           toast.success(res.data.result)
         }else{
           toast.error(res.data.error)
+          setTimeout(() => {
+            window.location.replace(`/home`);
+          }, 3000);
         }
     })
     }    

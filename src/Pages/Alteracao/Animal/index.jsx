@@ -49,6 +49,9 @@ function App() {
           setAnimalId(animal.ID_INT_ANIMAL)
         } else {
           toast.error(res.data.error);
+          setTimeout(() => {
+            window.location.replace(`/home`);
+          }, 3000);
         }
       });
   }, []);

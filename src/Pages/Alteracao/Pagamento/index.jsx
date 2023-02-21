@@ -52,6 +52,9 @@ export default function EditarPagamento() {
           
         } else {
           toast.error(res.data.error);
+          setTimeout(() => {
+            window.location.replace(`/home`);
+          }, 3000);
         }
       });
   }, []);

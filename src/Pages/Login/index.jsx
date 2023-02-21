@@ -23,7 +23,6 @@ function App() {
       login: login,
       senha: password,
     }).then((res)=>{
-      console.log(res)
     if(res.data.token){
       cookies.set('Token',res.data.token)
       window.location.replace(`/home`)

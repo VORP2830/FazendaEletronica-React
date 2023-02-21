@@ -30,6 +30,9 @@ function EditarTipoPgamento() {
           setTipoPagamentoId(tipoPagamento.ID_INT_TIPO_PAGAMENTO)
         } else {
           toast.error(res.data.error);
+          setTimeout(() => {
+            window.location.replace(`/home`);
+          }, 3000);
         }
       });
   }, []);

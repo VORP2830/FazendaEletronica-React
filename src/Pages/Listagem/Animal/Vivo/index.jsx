@@ -47,6 +47,9 @@ export default function AnimalVivo() {
           window.location.reload()
         }else{
           toast.error(res.data.error)
+          setTimeout(() => {
+            window.location.replace(`/home`);
+          }, 3000);
         }
     })
     }
